@@ -25,7 +25,7 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
         // Set up view if editing an existing Photo
         if let photo = photo {
             photoImageView.image = photo.image
-            descriptionTextField.text = photo.description
+            descriptionTextField.text = photo.imageDescription
         }
         
         // Enable the Save button only if the text field has a valid Meal name

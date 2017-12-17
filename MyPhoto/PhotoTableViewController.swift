@@ -19,8 +19,13 @@ class PhotoTableViewController: UITableViewController {
         // Use the edit button item provied by the table view controller
         navigationItem.leftBarButtonItem = editButtonItem
         
-        // Load some sample images
-        loadSamplePhotos()
+        // Load saved photos, otherwise load sample data.
+        if let savedphotos = loadPhotos() {
+            photos += savedphotos
+        } else {
+            // Load some sample images
+            loadSamplePhotos()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,7 +54,7 @@ class PhotoTableViewController: UITableViewController {
         
         // Set properties for the cell
         cell.photoImageView.image = photo.image
-        cell.descriptionLabel.text = photo.description
+        cell.descriptionLabel.text = photo.imageDescription
     
         return cell
     }
@@ -67,6 +72,7 @@ class PhotoTableViewController: UITableViewController {
         if editingStyle == .delete {
             // Delete the row from the data source
             photos.remove(at: indexPath.row)
+            savePhotos()
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -137,6 +143,8 @@ class PhotoTableViewController: UITableViewController {
                 photos.append(photo)
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
             }
+            savePhotos()
+            
         }
     }
     
@@ -152,6 +160,20 @@ class PhotoTableViewController: UITableViewController {
         let photo3 = Photo(image: image3, description: "Playing Corgi")
         
         photos += [photo1, photo2, photo3]
+    }
+    
+    private func savePhotos() {
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(photos, toFile: Photo.ArchiveURL.path)
+        
+        if isSuccessfulSave {
+            os_log("Photo successfully saved", log: OSLog.default, type: .debug)
+        } else {
+            os_log("Failed to save photo", log: OSLog.default, type: .error)
+        }
+    }
+    
+    private func loadPhotos() -> [Photo]? {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: Photo.ArchiveURL.path) as? [Photo]
     }
     
 
