@@ -19,7 +19,7 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     
     var photosInDetail = [Photo]()
     var photo: Photo?
-    var additionalIndex: Int?
+    var index: Int? = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,7 +109,7 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     @IBAction func nextButtonClicked(_ sender: UIButton) {
         let indexOfCurrentPhoto = photosInDetail.index(of: photo!)
         let newIndex = (indexOfCurrentPhoto! + 1) % photosInDetail.count
-        additionalIndex = newIndex
+        index = newIndex
         photo = photosInDetail[newIndex]
         updatePhoto()
     }
@@ -120,7 +120,7 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
         if newIndex < 0 {
             newIndex = photosInDetail.count - 1
         }
-        additionalIndex = newIndex
+        index = newIndex
         photo = photosInDetail[newIndex]
         updatePhoto()
     }

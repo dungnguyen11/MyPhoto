@@ -131,11 +131,13 @@ class PhotoTableViewController: UITableViewController {
     
     //MARK: Actions
     @IBAction func unwindToPhotoList(sender: UIStoryboardSegue) {
-        if let sourceViewController = sender.source as? PhotoViewController, let photo = sourceViewController.photo{
+        if let sourceViewController = sender.source as? PhotoViewController, let photo = sourceViewController.photo, let index = sourceViewController.index {
 
             if let seletedIndexPath = tableView.indexPathForSelectedRow { // User edit existing photo
                 // Update an existing meal
-                photos[seletedIndexPath.row] = photo
+                photos[index] = photo
+                tableView.reloadData()
+//                photos[seletedIndexPath.row] = photo
                 tableView.reloadRows(at: [seletedIndexPath], with: .none)
             } else {                                                      // User create new photo
                 // Add a new meal to the list of photo
