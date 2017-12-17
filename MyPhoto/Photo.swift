@@ -10,15 +10,11 @@ import UIKit
 
 class Photo {
     //MARK: Properties
-    var photo: UIImage?
+    var image: UIImage
     var description: String
     
-    init?(photo: UIImage?, description: String) {
-        guard description.count > 140 else {
-            return nil
-        }
-        
-        self.photo = photo
+    init(image: UIImage, description: String) {
+        self.image = image
         self.description = description
     }
     

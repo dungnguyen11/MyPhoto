@@ -9,7 +9,10 @@
 import UIKit
 
 class PhotoTableViewCell: UITableViewCell {
-
+    //MARK: Propersties
+    @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
