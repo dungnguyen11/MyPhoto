@@ -122,6 +122,7 @@ class PhotoTableViewController: UITableViewController {
             
             let selectedPhoto = photos[indexPath.row]
             photoDetailViewController.photo = selectedPhoto
+            photoDetailViewController.photosInDetail = photos
         default:
             fatalError("Unexpected Segue Identifier: \(String(describing: segue.identifier))")
         }
@@ -130,9 +131,8 @@ class PhotoTableViewController: UITableViewController {
     
     //MARK: Actions
     @IBAction func unwindToPhotoList(sender: UIStoryboardSegue) {
-       
-        if let sourceViewController = sender.source as? PhotoViewController, let photo = sourceViewController.photo {
-            
+        if let sourceViewController = sender.source as? PhotoViewController, let photo = sourceViewController.photo{
+
             if let seletedIndexPath = tableView.indexPathForSelectedRow { // User edit existing photo
                 // Update an existing meal
                 photos[seletedIndexPath.row] = photo

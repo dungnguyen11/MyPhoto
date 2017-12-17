@@ -14,19 +14,25 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var descriptionTextField: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var previousButton: UIButton!
     
+    var photosInDetail = [Photo]()
     var photo: Photo?
+    var additionalIndex: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         descriptionTextField.delegate = self
         
-        // Set up view if editing an existing Photo
-        if let photo = photo {
-            photoImageView.image = photo.image
-            descriptionTextField.text = photo.imageDescription
+        if photosInDetail.isEmpty {
+            nextButton.isEnabled = false
+            previousButton.isEnabled = false
         }
+        
+        // Set up view if editing an existing Photo
+        updatePhoto()
         
         // Enable the Save button only if the text field has a valid Meal name
         updateSaveButtonState()
@@ -38,6 +44,7 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     }
     
     //MARK: UITextFieldDelegate
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         descriptionTextField.resignFirstResponder()
         return true
@@ -53,6 +60,7 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     }
     
     //MARK: UIImagePickerControllerDelegate
+    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
@@ -72,7 +80,6 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     
     // Dimiss view when user press Cancel button
     @IBAction func cancel(_ sender: UIBarButtonItem) {
-        
         let isPresentingInAddPhotoMode = presentingViewController is UINavigationController
         
         if isPresentingInAddPhotoMode { // User is adding a new photo
@@ -82,7 +89,6 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
         } else {
             fatalError("The MealViewController is not inside a navigation controller.")
         }
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -98,6 +104,25 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
         
         photo = Photo(image: image!, description: description)
         
+    }
+    
+    @IBAction func nextButtonClicked(_ sender: UIButton) {
+        let indexOfCurrentPhoto = photosInDetail.index(of: photo!)
+        let newIndex = (indexOfCurrentPhoto! + 1) % photosInDetail.count
+        additionalIndex = newIndex
+        photo = photosInDetail[newIndex]
+        updatePhoto()
+    }
+    
+    @IBAction func previousButtonClicked(_ sender: UIButton) {
+        let indexOfCurrentPhoto = photosInDetail.index(of: photo!)
+        var newIndex = indexOfCurrentPhoto! - 1
+        if newIndex < 0 {
+            newIndex = photosInDetail.count - 1
+        }
+        additionalIndex = newIndex
+        photo = photosInDetail[newIndex]
+        updatePhoto()
     }
     
     
@@ -120,6 +145,13 @@ class PhotoViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
         // Disable the Save button if the text field is empty
         let text = descriptionTextField.text ?? ""
         saveButton.isEnabled = !text.isEmpty
+    }
+    
+    private func updatePhoto(){
+        if let photo = photo {
+            photoImageView.image = photo.image
+            descriptionTextField.text = photo.imageDescription
+        }
     }
     
 

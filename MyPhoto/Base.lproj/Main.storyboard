@@ -104,6 +104,22 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qUS-yb-4mt">
+                                <rect key="frame" x="20" y="416" width="75" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Pervious"/>
+                                <connections>
+                                    <action selector="previousButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zod-Jk-fYB"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WVj-AU-0nx">
+                                <rect key="frame" x="353" y="416" width="41" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Next"/>
+                                <connections>
+                                    <action selector="nextButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uKs-gy-Y3D"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -112,7 +128,13 @@
                             <constraint firstItem="XQ6-Ve-4qM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Efz-YB-XDH"/>
                             <constraint firstItem="0Di-lo-Wbd" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="22" id="TbE-Mg-Q6z"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0Di-lo-Wbd" secondAttribute="trailing" constant="63" id="ZbL-KN-owT"/>
+                            <constraint firstItem="WVj-AU-0nx" firstAttribute="trailing" secondItem="XQ6-Ve-4qM" secondAttribute="trailing" id="bAk-5N-yXJ"/>
+                            <constraint firstItem="qUS-yb-4mt" firstAttribute="baseline" secondItem="WVj-AU-0nx" secondAttribute="baseline" id="ka3-Wy-tIb"/>
                             <constraint firstItem="0Di-lo-Wbd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="62" id="o8h-Jq-rDD"/>
+                            <constraint firstItem="qUS-yb-4mt" firstAttribute="top" secondItem="XQ6-Ve-4qM" secondAttribute="bottom" constant="22" id="tPY-QH-8dc"/>
+                            <constraint firstItem="qUS-yb-4mt" firstAttribute="leading" secondItem="XQ6-Ve-4qM" secondAttribute="leading" id="uN0-f6-CTd"/>
+                            <constraint firstItem="WVj-AU-0nx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" symbolic="YES" id="x9V-sA-cRB"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qUS-yb-4mt" secondAttribute="trailing" constant="20" symbolic="YES" id="zcj-8y-WT3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -130,7 +152,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="descriptionTextField" destination="XQ6-Ve-4qM" id="ACw-Nr-0dn"/>
+                        <outlet property="nextButton" destination="WVj-AU-0nx" id="y2A-bY-0tM"/>
                         <outlet property="photoImageView" destination="0Di-lo-Wbd" id="UY3-AG-RZM"/>
+                        <outlet property="previousButton" destination="qUS-yb-4mt" id="Dug-El-2Ne"/>
                         <outlet property="saveButton" destination="hyV-pO-m9s" id="YiO-vX-SuE"/>
                     </connections>
                 </viewController>
