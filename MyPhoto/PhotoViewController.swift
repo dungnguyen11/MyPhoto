@@ -1,3 +1,18 @@
+/*
+ RMIT University Vietnam
+ Course: COSC2659 iOS Development
+ Semester: 2017C
+ Assignment: 2
+ Author: Nguyen Tri Dung
+ ID: s3598776
+ Created date: 17/12/2017
+ 
+ Acknowledgement:
+ Resource: "Start Developing iOS App (Swift) - FoodTracker - Apple"
+ Link: https://developer.apple.com/library/content/referencelibrary/GettingStarted/DevelopiOSAppsSwift/#//apple_ref/doc/uid/TP40015214-CH2-SW1
+ 
+ */
+
 //
 //  ViewController.swift
 //  MyPhoto
